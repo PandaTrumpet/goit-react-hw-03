@@ -12,7 +12,7 @@ export default function ContactForm({ onSubmit }) {
     console.log(values.username, values.number);
     onSubmit({
       id: Date.now(),
-      username: values.username,
+      name: values.username,
       number: values.number,
     });
     actions.resetForm();
@@ -26,7 +26,7 @@ export default function ContactForm({ onSubmit }) {
         </div>
         <div className={css.formContainer}>
           <label htmlFor={numberId}>Number</label>
-          <Field type="phone" id={numberId} name="number" />
+          <Field type="tel" id={numberId} name="number" />
         </div>
         <button type="submit" className={css.btnContact}>
           Add contact
