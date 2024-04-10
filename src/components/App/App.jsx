@@ -9,7 +9,7 @@ const App = () => {
   const [search, setSearch] = useState("");
 
   const searchContact = contact.filter((el) =>
-    el.name.includes(search.toLowerCase())
+    el.name.toLowerCase().includes(search.toLowerCase())
   );
 
   const addContact = (newContact) => {
