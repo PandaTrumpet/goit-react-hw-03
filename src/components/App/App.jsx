@@ -38,7 +38,11 @@ const App = () => {
 
   const deleteContact = (contactId) => {
     setContact((beforeContact) => {
-      return beforeContact.filter((contact) => contact.id !== contactId);
+      const updatedContacts = beforeContact.filter(
+        (contact) => contact.id !== contactId
+      );
+      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+      return updatedContacts;
     });
   };
   return (

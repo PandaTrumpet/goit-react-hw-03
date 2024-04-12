@@ -33,12 +33,16 @@ export default function ContactForm({ forSubmit }) {
         <div className={css.formContainer}>
           <label htmlFor={nameId}>Name</label>
           <Field type="text" id={nameId} name="username" />
-          <ErrorMessage name="username" as="span" />
+          <ErrorMessage
+            className={css.error}
+            name="username"
+            component="span"
+          />
         </div>
         <div className={css.formContainer}>
           <label htmlFor={numberId}>Number</label>
           <Field type="tel" id={numberId} name="number" />
-          <ErrorMessage name="number" as="span" />
+          <ErrorMessage className={css.error} name="number" component="span" />
         </div>
         <button type="submit" className={css.btnContact}>
           Add contact
