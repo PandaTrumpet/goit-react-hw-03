@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import css from "./App.module.css";
+import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 import contacts from "../../contacts.json";
 import ContactForm from "../ContactForm/ContactForm";
 import ContactList from "../ContactList/ContactList";
@@ -14,9 +14,28 @@ const App = () => {
 
   const addContact = (newContact) => {
     setContact((beforeContacts) => {
-      return [...beforeContacts, newContact];
+      const updatedContacts = [...beforeContacts, newContact];
+      localStorage.setItem("contacts", JSON.stringify(updatedContacts));
+      return updatedContacts;
     });
   };
+
+  useEffect(() => {
+    const storedContacts = JSON.parse(localStorage.getItem("contacts"));
+    if (storedContacts) {
+      setContact(storedContacts);
+    }
+  }, []);
+  const handleSubmit = (values, actions) => {
+    addContact({
+      id: nanoid(),
+      name: values.username,
+      number: values.number,
+    });
+
+    actions.resetForm();
+  };
+
   const deleteContact = (contactId) => {
     setContact((beforeContact) => {
       return beforeContact.filter((contact) => contact.id !== contactId);
@@ -26,7 +45,7 @@ const App = () => {
     <div>
       <h1>Phonebook</h1>
 
-      <ContactForm onSubmit={addContact} />
+      <ContactForm forSubmit={handleSubmit} />
       <SearchBox value={search} onChange={setSearch} />
       <ContactList contacts={searchContact} onDelete={deleteContact} />
     </div>
