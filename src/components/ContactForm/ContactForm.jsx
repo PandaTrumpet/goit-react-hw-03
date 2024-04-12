@@ -17,7 +17,10 @@ export default function ContactForm({ forSubmit }) {
       .max(50, "Too long")
       .trim()
       .required("Required"),
-    number: Yup.string().min(2, "Too short").max(16, "Too long"),
+    number: Yup.string()
+      .matches(/^\d{3}-\d{2}-\d{2}$/, "Invalid phone number format")
+      .min(2, "Too short")
+      .max(16, "Too long"),
   });
 
   return (
